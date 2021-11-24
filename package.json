@@ -1,0 +1,25 @@
+{
+  "name": "qiankun-vue-demo",
+  "version": "1.0.0",
+  "description": "用`qiankun`来实现`vue`技术栈的前端微服务",
+  "main": "index.js",
+  "scripts": {
+    "start:mic1": "cd mic1 && npm run serve ",
+    "start:mic2": "cd mic2 && npm run serve",
+    "start:main": "cd main && npm run dev",
+    "start-all": "npm-run-all --parallel start:*"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gongshun/qiankun-vue-demo.git"
+  },
+  "author": "gongshun",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/gongshun/qiankun-vue-demo/issues"
+  },
+  "homepage": "https://github.com/gongshun/qiankun-vue-demo#readme",
+  "devDependencies": {
+    "npm-run-all": "^4.1.5"
+  }
+}
