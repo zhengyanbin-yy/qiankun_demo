@@ -23,7 +23,7 @@ import { mapGetters } from 'vuex'
 import Logo from './Logo'
 import SidebarItem from './SidebarItem'
 import variables from '@/styles/variables.scss'
-import {constantRoutes} from '@/router'
+import { constantRoutes } from '@/router'
 
 export default {
   components: { SidebarItem, Logo },
@@ -50,9 +50,9 @@ export default {
     isCollapse() {
       return !this.sidebar.opened
     },
-      menus(){
-        return [
-            /*{
+    menus() {
+      return [
+        /* {
                 menuName:"子应用1页面",
                 subsetMenu:[],
                 url:"/mic1/function/manage"
@@ -62,23 +62,33 @@ export default {
                 subsetMenu:[],
                 url:"/mic2/function/manage"
             },*/
-            {
-                menuName:"子应用1的页面",
-                subsetMenu:[],
-                url:"/mic1/dynamic/1"
-            },
-            {
-                menuName:"和上面菜单打开同一页面只是参数不同",
-                subsetMenu:[],
-                url:"/mic1/dynamic/2"
-            },
-            {
-                menuName:"主应用显示多个子应用",
-                subsetMenu:[],
-                url:"/mics/dynamic"
-            },
-        ]
-      }
+        {
+          menuName: '子应用1的页面',
+          subsetMenu: [],
+          url: '/mic1/dynamic/1'
+        },
+        {
+          menuName: '和上面菜单打开同一页面只是参数不同',
+          subsetMenu: [],
+          url: '/mic1/dynamic/2'
+        },
+        {
+          menuName: '主应用显示多个子应用',
+          subsetMenu: [],
+          url: '/mics/dynamic'
+        },
+        {
+          menuName: '主应用动态路由1',
+          subsetMenu: [],
+          url: '/main/dynamic/1'
+        },
+        {
+          menuName: '主应用动态路由2',
+          subsetMenu: [],
+          url: '/main/dynamic/2'
+        }
+      ]
+    }
   }
 }
 </script>

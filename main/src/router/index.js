@@ -33,20 +33,34 @@ import Layout from '@/layout'
  * all roles can be accessed
  */
 export const constantRoutes = [
-    {
-        path:'/mics',
-        component: Layout,
-        children: [
-            {
-                path:'dynamic',
-                name:'MicDemo',
-                meta: {
-                    title:'主应用显示多个子应用',
-                },
-                component:()=>import('@/views/micsDemo/MicDemo')
-            }
-        ]
-    },
+  {
+    path: '/mics',
+    component: Layout,
+    children: [
+      {
+        path: 'dynamic',
+        name: 'MicDemo',
+        meta: {
+          title: '主应用显示多个子应用'
+        },
+        component: () => import('@/views/micsDemo/MicDemo')
+      }
+    ]
+  },
+  {
+    path: '/main',
+    component: Layout,
+    children: [
+      {
+        path: 'dynamic/:viewId',
+        name: 'DynamicPage',
+        component: () => import('../views/dynamic/DynamicPage'),
+        meta: {
+          title: '主应用动态路由页面'
+        }
+      }
+    ]
+  },
   {
     path: '/redirect',
     component: Layout,
@@ -91,7 +105,7 @@ export const constantRoutes = [
       }
     ]
   },
-    { path: '*', redirect: '/404', hidden: true }
+  { path: '*', redirect: '/404', hidden: true }
 ]
 
 /**
@@ -108,7 +122,7 @@ const createRouter = () => new Router({
   mode: 'history', // require service support
   scrollBehavior: () => ({ y: 0 }),
   routes: constantRoutes,
-    base: '/portal/'
+  base: '/portal/'
 })
 
 const router = createRouter()

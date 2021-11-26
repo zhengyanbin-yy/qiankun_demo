@@ -65,12 +65,13 @@ export default {
   mounted() {
     this.initTags()
     this.addTags()
-      actions.onGlobalStateChange(state => {
-          const { subRoute } = state;
-          if(subRoute && !this.visitedViews.filter(item => item.path === subRoute.path).length){
-              this.addTags(subRoute)
-          }
-      }, true);
+    actions.onGlobalStateChange((state, prev) => {
+      const { subRoute } = state
+      const pState = prev.subRoute
+      if (subRoute && !this.visitedViews.filter(item => item.path === subRoute.path).length && (!pState || subRoute.fullPath !== pState.fullPath && subRoute.isMico)) {
+        this.addTags(subRoute)
+      }
+    }, true)
   },
   methods: {
     isActive(route) {
@@ -109,13 +110,13 @@ export default {
         }
       }
     },
-      addTags($route) {
-          const { name } = $route ? $route : this.$route;
+    addTags($route) {
+      const { name } = $route || this.$route
       if (name) {
-          this.$store.dispatch('tagsView/addView', $route ? $route : this.$route)
-          if($route){
-              this.moveToCurrentTag()
-          }
+        this.$store.dispatch('tagsView/addView', $route || this.$route)
+        if ($route) {
+          this.moveToCurrentTag()
+        }
       }
       return false
     },

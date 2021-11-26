@@ -1,13 +1,13 @@
 const state = {
   visitedViews: [],
   cachedViews: [],
-    closeViewFullPath:'',
-    newViewFullPath:'',
+  closeViewFullPath: '',
+  newViewFullPath: ''
 }
 
 const mutations = {
   ADD_VISITED_VIEW: (state, view) => {
-    if (state.visitedViews.some(v => v.path === view.path)) return
+    if (state.visitedViews.some(v => v.fullPath === view.fullPath)) return
     state.visitedViews.push(
       Object.assign({}, view, {
         title: view.meta.title || 'no-name'
@@ -66,8 +66,11 @@ const mutations = {
       }
     }
   },
-    UPDATE_CLOSE_PATH:(state,path)=>state.closeViewFullPath = path,
-    UPDATE_NEW_PATH:(state,path)=>state.newViewFullPath = path,
+  UPDATE_CLOSE_PATH: (state, path) => state.closeViewFullPath = path,
+  UPDATE_NEW_PATH: (state, path) => {
+    state.closeViewFullPath = ''
+    state.newViewFullPath = path
+  }
 }
 
 const actions = {
@@ -83,7 +86,7 @@ const actions = {
   },
 
   delView({ dispatch, state, commit }, view) {
-      commit('UPDATE_CLOSE_PATH',view.fullPath)
+    commit('UPDATE_CLOSE_PATH', view.fullPath)
     return new Promise(resolve => {
       dispatch('delVisitedView', view)
       dispatch('delCachedView', view)

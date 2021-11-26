@@ -31,7 +31,7 @@ const routes = [
         name:'DynamicPage',
         component:()=>import('../views/dynamic/DynamicPage'),
         meta:{
-            title:'动态展示内容页面'
+            title:'动态路由页面'
         }
     },
     {

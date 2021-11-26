@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h3>这个页面的问题是 如何在第二此打开菜单的时候重新渲染 第二次的那个</h3>
+        <h3>子应用动态路由页面  我的参数是 {{$route.params.viewId}}</h3>
         <input type="text" v-model="test">
     </div>
 </template>

@@ -1,0 +1,7 @@
+node_modules
+/main/node_modules
+/mic1/node_modules
+/mic2/node_modules
+
+.idea
+.vscode
