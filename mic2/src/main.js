@@ -27,7 +27,7 @@ function render(props = {}) {
     render: (h) => h(App),
   }).$mount(container ? container.querySelector('#app') : '#app')
     if (props?.data?.defaultPath) {
-        router.push(props.data.defaultPath);
+        router.push(`${props.data.defaultPath}?isFormMicApp=yes`);
     }
 }
 

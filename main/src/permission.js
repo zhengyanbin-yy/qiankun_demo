@@ -54,7 +54,11 @@ router.beforeEach(async(to, from, next) => {
                     children: []
                 }])
                 store.commit('app/SET_APPS', subApps)
-                next()
+                if (to.fullPath==='/404'&&subApps.find(subApp=>subApp.name===to.redirectedFrom.split('/')[1])){
+                    next(to.redirectedFrom)
+                }else {
+                    next()
+                }
             },500)
         }else {
             next()

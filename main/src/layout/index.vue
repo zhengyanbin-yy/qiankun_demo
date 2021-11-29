@@ -55,16 +55,6 @@ export default {
       this.$store.dispatch('app/closeSideBar', { withoutAnimation: false })
     }
   },
-    data(){
-        return{
-            showMainArea:false,
-        }
-    },
-    mounted() {
-        this.$nextTick(()=>{
-            this.showMainArea = true
-        })
-    }
 }
 </script>
 
