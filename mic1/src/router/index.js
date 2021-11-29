@@ -23,16 +23,13 @@ const routes = [
         name: 'manage',
         component: () => import('../views/function/manage.vue'),
         meta:{
-            title:'子应用1页面'
+            title:'管理页面'
         }
     },
     {
-        path:'/dynamic/:viewId',
-        name:'DynamicPage',
-        component:()=>import('../views/dynamic/DynamicPage'),
-        meta:{
-            title:'动态路由页面'
-        }
+        path:'/design/:viewId',
+        name:'DesignPage',
+        component: () =>import('../views/designPage/DesignPage'),
     },
     {
         path:'*',

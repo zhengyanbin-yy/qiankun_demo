@@ -68,7 +68,7 @@ export default {
     actions.onGlobalStateChange((state, prev) => {
       const { subRoute } = state
       const pState = prev.subRoute
-      if (subRoute && !this.visitedViews.filter(item => item.path === subRoute.path).length && (!pState || subRoute.fullPath !== pState.fullPath && subRoute.isMico)) {
+      if (subRoute && !this.visitedViews.filter(item => item.fullPath === subRoute.fullPath).length && (!pState || subRoute.fullPath !== pState.fullPath && subRoute.isMico)) {
         this.addTags(subRoute)
       }
     }, true)

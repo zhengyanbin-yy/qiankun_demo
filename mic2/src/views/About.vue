@@ -1,5 +1,6 @@
 <template>
   <div class="about">
+      <input v-model="val"/>
     <h3>我是  子应用2  中的页面</h3>
       <div>This is an about page</div>
   </div>

@@ -1,8 +1,5 @@
 <template>
   <div id="app">
-      <!--<router-link to="/">home</router-link> | 
-      <router-link to="/list">list</router-link> |
-      <router-link to="/design">design</router-link>-->
       <keep-alive :include="loadedRouteNames">
           <template v-if="viewId">
               <router-view v-for="(id,index) in views" v-if="viewId&&viewId===id" :key="index" />

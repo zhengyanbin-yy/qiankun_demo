@@ -8,11 +8,11 @@
                         </app-link>
         </template>
 
-        <el-submenu v-else ref="subMenu" :index="item.menuCode" popper-append-to-body>
+        <el-submenu v-else ref="subMenu" :index="item.menuName" popper-append-to-body>
             <template slot="title">
                 <item :icon="item.meta && item.meta.icon" :title="item.menuName"/>
             </template>
-            <sidebar-item v-for="child in item.subsetMenu" :key="child.menuCode" :is-nest="true" :item="child" :base-path="resolvePath(child.url)" class="nest-menu"/>
+            <sidebar-item v-for="child in item.subsetMenu" :key="child.menuName" :is-nest="true" :item="child" :base-path="resolvePath(child.url)" class="nest-menu"/>
         </el-submenu>
     </div>
 </template>

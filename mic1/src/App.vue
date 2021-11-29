@@ -1,18 +1,26 @@
 <template>
-  <div id="app">
-      <keep-alive :include="loadedRouteNames">
-          <template v-if="viewId">
-              <router-view v-for="(id,index) in views" v-if="viewId&&viewId===id" :key="index" />
-          </template>
-          <template v-if="!viewId">
-              <router-view />
-          </template>
-      </keep-alive>
-  </div>
+    <div id="app">
+        <!--设计器产生的页面-->
+        <div v-show="viewId">
+            <template v-for="(id,index) in views">
+                <keep-alive :key="index">
+                    <router-view v-if="viewId===id" :key="id" />
+                </keep-alive>
+            </template>
+        </div>
+        <!--常规的vue页面-->
+        <div v-show="!viewId">
+            <keep-alive :include="loadedRouteNames">
+                <router-view :key="$route.fullPath" />
+            </keep-alive>
+        </div>
+    </div>
 </template>
 <script>
-    const { name:appName } = require('../package.json')
+    import {mapState} from 'vuex'
+    import pageTab from "./mixins/pageTab";
     export default {
+        mixins:[pageTab],
         data(){
             return{
                 loadedRouteNames: [],
@@ -20,26 +28,20 @@
                 viewId:''
             }
         },
+        computed:{
+            ...mapState(['appName'])
+        },
         methods:{
             setViews(){
                 this.viewId = this.$route.params.viewId
-                if(this.viewId&&!this.views.includes(this.viewId))this.views.push(this.viewId)
             }
         },
         watch:{
             $route(n){
                 this.setViews()
-                const routeObj = {
-                    fullPath: '/'+appName+n.fullPath,
-                    hash: n.hash,
-                    meta: n.meta,
-                    name: n.name,
-                    params: n.params,
-                    path: '/'+appName+n.path,
-                    query: n.query,
-                    isMico: true
+                if (!['DesignPage'].includes(n.name)) {
+                    this.emitRouteInfo(n)
                 }
-                this.parentProps.setGlobalState({subRoute: routeObj})
             }
         },
         mounted() {
@@ -47,13 +49,17 @@
 
             if (window.__POWERED_BY_QIANKUN__) {
                 this.parentProps.onGlobalStateChange(state => {
-                    if (state.hasOwnProperty(appName)){
-                        const { childRoute } = state[appName];
+                    if (state.hasOwnProperty(this.appName)){//排除主应用页面加载多个子应用的那种情况
+                        const { childRoute } = state[this.appName];
                         const loadedRoutes = childRoute.map(item => this.$router.resolve(item));
+                        let views = []
+                        loadedRoutes.forEach(item=>{
+                            if (['DesignPage'].includes(item.route.name)){
+                                views.push(item.route.params.viewId)
+                            }
+                        })
+                        this.views = views
                         this.loadedRouteNames = loadedRoutes.map(item => item.route.name);
-                        console.log('loadedRouteNames')
-                        console.log(this.loadedRouteNames)
-                        debugger
                     }
                 }, true);
             }

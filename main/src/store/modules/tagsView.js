@@ -75,6 +75,7 @@ const mutations = {
 
 const actions = {
   addView({ dispatch }, view) {
+      if (view?.query?.isFormMicApp==='yes')return false
     dispatch('addVisitedView', view)
     dispatch('addCachedView', view)
   },

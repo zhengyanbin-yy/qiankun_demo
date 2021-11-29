@@ -3,10 +3,9 @@ import VueRouter from "vue-router";
 import App from './App.vue'
 import store from './store'
 import routes from './router'
-const { name:appName } = require('../package.json')
+const appName = store.state.appName
 import './public-path'
 Vue.config.productionTip = false
-
 
 let instance = null;
 let router = null;
@@ -28,7 +27,7 @@ function render(props = {}) {
     render: (h) => h(App),
   }).$mount(container ? container.querySelector('#app') : '#app')
     if (props?.data?.defaultPath) {
-        router.push(props.data.defaultPath);
+        router.push(`${props.data.defaultPath}?isFormMicApp=yes`);
     }
 }
 
@@ -42,14 +41,14 @@ if (!isQiankun) {
  * 通常我们可以在这里做一些全局变量的初始化，比如不会在 unmount 阶段被销毁的应用级别的缓存等。
  */
 export async function bootstrap() {
-    
+    console.log("VueMicroApp bootstraped");
 }
 
 /**
  * 应用每次进入都会调用 mount 方法，通常我们在这里触发应用的渲染方法
  */
 export async function mount(props) {
-    
+    console.log("VueMicroApp mount", props);
     Vue.prototype.parentProps = props;
     render(props);
 }
