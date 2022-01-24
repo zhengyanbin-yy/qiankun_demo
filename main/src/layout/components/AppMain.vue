@@ -4,11 +4,16 @@
           mainRoutes  打开主应用的路由集合
           使用循环  router-view  的原因是，如果两个tab页面匹配到同一个动态路由，如：/demo/:id ，这两个页面无法保持状态或者保持状态有问题
           -->
-    <div v-for="(item,index) in mainRoutes" v-show="item===key" :key="index">
+    <!--<div v-for="(item,index) in mainRoutes" v-show="item===key" :key="index">
       <keep-alive>
         <router-view :key="index" />
       </keep-alive>
-    </div>
+    </div>-->
+    <template v-for="(item,index) in mainRoutes">
+      <keep-alive :key="index">
+        <router-view :key="item" v-if="item===fullPath"/>
+      </keep-alive>
+    </template>
     <!-- 循环生成容器，每一个微应用使用独立的容器，自己控制微应用的显隐 -->
     <div v-for="item in microApps" :key="item.name" :id="item.container.slice(1)" v-show="currentFullPath.startsWith(item.prefixPath)" style="height:100%;" />
   </section>
@@ -27,6 +32,9 @@ export default {
   },
   computed: {
     ...mapState('tagsView', ['cachedViews', 'closeViewFullPath', 'newViewFullPath']),
+    fullPath() {
+      return this.$route.fullPath
+    },
     key() {
       return this.$route.path
     },
