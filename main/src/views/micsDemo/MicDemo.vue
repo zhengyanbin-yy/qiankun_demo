@@ -10,10 +10,11 @@
       <el-button>添加子应用</el-button>
     </el-popover>
     <el-button @click="addSon">点这里</el-button>
+    <br>
       <div id="mic-static1" style="width: 45%;height: 300px;background: #eee;display: inline-block;vertical-align: middle;" />
       <div id="mic-static2" style="width: 45%;height: 300px;background: #eee;display: inline-block;vertical-align: middle;" />
     <div style="width: 100%;height: calc(100% - 80px)">
-      <div v-for="(item,index) of apps" :id="'mic-wrap'+(index+1)" :key="index" style="width: 45%;height: 300px;background: #eee;display: inline-block" />
+      <div v-for="(item,index) of apps" :id="'mic-wrap'+(index+1)" :key="index" style="width: 45%;height: 300px;background: #eee;display: inline-block;vertical-align: middle;" />
     </div>
   </div>
 </template>
