@@ -1,5 +1,8 @@
 <template>
-    <input type="text" v-model="test">
+    <div>
+        <button @click="$router.push('/list?isFormMicApp=yes')">跳转</button>
+        <input type="text" v-model="test">
+    </div>
 </template>
 
 <script>
@@ -9,6 +12,9 @@
             return{
                 test:''
             }
+        },
+        mounted() {
+            console.log('function mounted')
         }
     }
 </script>

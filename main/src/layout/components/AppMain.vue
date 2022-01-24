@@ -1,6 +1,6 @@
 <template>
   <section class="app-main">
-      <!--  
+      <!--
           mainRoutes  打开主应用的路由集合
           使用循环  router-view  的原因是，如果两个tab页面匹配到同一个动态路由，如：/demo/:id ，这两个页面无法保持状态或者保持状态有问题
           -->
